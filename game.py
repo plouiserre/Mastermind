@@ -10,3 +10,5 @@ class Game:
     def Play(self):
        Master = Player(PlayerType.MASTER)
        Master.CreateSecretLine()
+       Guesser = Player(PlayerType.GUESSER)
+       Guesser.GuessSecretLine(1)
