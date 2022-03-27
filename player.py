@@ -10,10 +10,9 @@ class Player :
         self.Type = playerType
         self.Winner = False
 
-    def CreateSecretLine(self) : 
+    def CreateSecretLine(self, grid) : 
         if self.Type == PlayerType.MASTER : 
-            firstLine = Line(0)
-            firstLine.CreateSecretLine()
+            grid.CreateSecretLine(0)
         else :
             raise Exception("Only MASTER player can create SecretLine")
 

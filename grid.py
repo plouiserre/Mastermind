@@ -1,31 +1,25 @@
 import random
 from piece import Piece, ColorCombinaison
+from line import Line
 
-class Line : 
-    def __init__(self, index) :
-        self.pieces = []
-        self.index = index
-        self.colors = [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, 
-                        ColorCombinaison.PINK, ColorCombinaison.PURPLE, ColorCombinaison.RED,
-                        ColorCombinaison.YELLOW]
-
-    '''
+class Grid :
     def CreateSecretLine(self) :
-        if self.index == 0 : 
+        secretLine  = Line(0)
+        if secretLine.index == 0 : 
             maxPiece = 4
             i = 0 
             while i < maxPiece :
-                indexNewColor = random.randrange(0, len(self.colors))
-                colorChoose = self.colors[indexNewColor]
+                indexNewColor = random.randrange(0, len(secretLine.colors))
+                colorChoose = secretLine.colors[indexNewColor]
                 piece = Piece(i, colorChoose)
-                self.colors.remove(colorChoose)
-                self.pieces.append(piece)
+                secretLine.colors.remove(colorChoose)
+                secretLine.pieces.append(piece)
                 i += 1
-            # To delete new loops
+            ''' To delete new loops'''
             print("Secret Line \n")
-            for piece in self.pieces : 
+            for piece in secretLine.pieces : 
                 print("Index :",piece.Index, "Couleur :", piece.Color)
-    '''
+        return secretLine
 
     #for the moment I don't factorize GuessLine with CreateSecretLine because the code will change in the future
     def GuessLine(self) : 
@@ -44,4 +38,3 @@ class Line :
             for piece in piecesGuessed : 
                 print("Index :",piece.Index, "Couleur :", piece.Color)
         return piecesGuessed
-

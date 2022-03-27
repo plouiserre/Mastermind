@@ -1,5 +1,7 @@
 from line import Line
+#TODO : à supprimer
 from player import PlayerType, Player
+from grid import Grid
 
 #TODO : change class name to board
 class Game: 
@@ -8,7 +10,7 @@ class Game:
     
     #TODO : manage all game
     def Play(self):
-       Master = Player(PlayerType.MASTER)
-       Master.CreateSecretLine()
+       grid = Grid()
+       grid.CreateSecretLine()
        Guesser = Player(PlayerType.GUESSER)
        Guesser.GuessSecretLine(1)
