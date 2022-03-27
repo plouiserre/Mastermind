@@ -22,16 +22,17 @@ class Grid :
         return secretLine
 
     #for the moment I don't factorize GuessLine with CreateSecretLine because the code will change in the future
-    def GuessLine(self) : 
+    def GuessLine(self, index) : 
         piecesGuessed = []
-        if self.index > 0 :
+        guessLine = Line(index)
+        if guessLine.index > 0 :
             maxPiece = 4
             i = 0
             while i < maxPiece :
-                indexNewColor = random.randrange(0, len(self.colors))
-                colorChoose = self.colors[indexNewColor]
+                indexNewColor = random.randrange(0, len(guessLine.colors))
+                colorChoose = guessLine.colors[indexNewColor]
                 piece = Piece(i, colorChoose)
-                self.colors.remove(colorChoose)
+                guessLine.colors.remove(colorChoose)
                 piecesGuessed.append(piece)
                 i += 1
             print("Pieces Guessed \n")

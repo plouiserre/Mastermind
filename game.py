@@ -13,4 +13,4 @@ class Game:
        grid = Grid()
        grid.CreateSecretLine()
        Guesser = Player(PlayerType.GUESSER)
-       Guesser.GuessSecretLine(1)
+       Guesser.GuessSecretLine(grid, 1)
