@@ -11,6 +11,8 @@ class Game:
     #TODO : manage all game
     def Play(self):
        grid = Grid()
-       grid.CreateSecretLine()
+       Master = Player(PlayerType.MASTER)
+       Master.CreateSecretLine(grid)
        Guesser = Player(PlayerType.GUESSER)
-       Guesser.GuessSecretLine(grid, 1)
+       Guesser.GuessSecretLine(grid,1)
+       grid.CorrectLine(1)

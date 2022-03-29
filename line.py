@@ -8,3 +8,4 @@ class Line :
         self.colors = [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, 
                         ColorCombinaison.PINK, ColorCombinaison.PURPLE, ColorCombinaison.RED,
                         ColorCombinaison.YELLOW]
+        self.piecesValidation = []

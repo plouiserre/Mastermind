@@ -11,10 +11,19 @@ class ColorCombinaison(Enum) :
     ORANGE = 7
 
 class ColorValidation(Enum) : 
+    #RED color missing in the secret combinaison
+    #YELLOR good color wrong place
+    #WHITE same place same color 
     RED = 1
     YELLOW = 2
+    WHITE = 3
+
+class PieceType(Enum):
+    COLOR = 1
+    VALIDATION = 2
 
 class Piece : 
-    def __init__(self, index, color) :
+    def __init__(self, index, color, type) :
         self.Index = index
-        self.Color = color
+        self.Type = type
+        self.Color = color 
