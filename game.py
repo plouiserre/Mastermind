@@ -10,9 +10,20 @@ class Game:
     
     #TODO : manage all game
     def Play(self):
-       grid = Grid()
-       Master = Player(PlayerType.MASTER)
-       Master.CreateSecretLine(grid)
-       Guesser = Player(PlayerType.GUESSER)
-       Guesser.GuessSecretLine(grid,1)
-       grid.CorrectLine(1)
+        grid = Grid()
+        Master = Player(PlayerType.MASTER)
+        Guesser = Player(PlayerType.GUESSER)
+        turn = 1 
+        guesserWins = False
+        
+        while turn <= 12 and guesserWins == False:
+            Master.CreateSecretLine(grid)
+            Guesser.GuessSecretLine(grid,1)
+            guesserWins = grid.CorrectLine(1)
+            turn += 1
+        
+        print("game finish")
+        if guesserWins == True :
+            print("guesser wins")
+        else :
+            print("master winner")
