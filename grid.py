@@ -73,8 +73,13 @@ class Grid :
             i += 1
 
         #TODO to delete in finish phase
+        allPiecesGuess = True
         for colorValidation in correctColors : 
+            if colorValidation != ColorValidation.WHITE :
+                allPiecesGuess = False
             print(colorValidation)
 
         self.piecesValidation = correctColors
+
+        return allPiecesGuess
     
