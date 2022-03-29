@@ -1,6 +1,7 @@
 from line import Line
 from enum import Enum
 
+#TODO changer enum cf https://fr.wikipedia.org/wiki/Mastermind
 class PlayerType(Enum) :
     MASTER = 1
     GUESSER = 2
@@ -10,19 +11,15 @@ class Player :
         self.Type = playerType
         self.Winner = False
 
-    def CreateSecretLine(self) : 
+    def CreateSecretLine(self, grid) : 
         if self.Type == PlayerType.MASTER : 
-            firstLine = Line(0)
-            firstLine.CreateSecretLine()
+            grid.CreateSecretLine()
         else :
             raise Exception("Only MASTER player can create SecretLine")
 
-    def GuessSecretLine(self, index) :
-        piecesGuessed = []
+    def GuessSecretLine(self, grid, index) :
         if self.Type == PlayerType.GUESSER :
-            LineProposed = Line(index)
-            piecesGuessed = LineProposed.GuessLine()
+            grid.GuessLine(index)
         else : 
             raise Exception("Only GUESSER player can guess the secret Line")
-        return piecesGuessed
-    
+        
