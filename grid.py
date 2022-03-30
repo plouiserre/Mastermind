@@ -1,4 +1,5 @@
 import random
+import copy
 from piece import ColorValidation, Piece, ColorCombinaison, PieceType
 from line import Line
 
@@ -26,27 +27,27 @@ class Grid :
         self.lines.append(secretLine)
 
     #TODO factoriser with CreateSecretLine
-    def GuessLine(self, index) : 
-        #TODO à supprimer 
-        print("index GuessLine", index)
+    def GuessLine(self, index, colors) : 
+        colorsGuessing = copy.copy(colors)
         guessLine = Line(index)
+        
         if guessLine.index > 0 :
             maxPiece = 4
             i = 0
             while i < maxPiece :
-                indexNewColor = random.randrange(0, len(guessLine.colors))
-                colorChoose = guessLine.colors[indexNewColor]
+                indexNewColor = random.randrange(0, len(colorsGuessing))
+                colorChoose = colorsGuessing[indexNewColor]
                 piece = Piece(i, colorChoose, PieceType.COLOR)
-                guessLine.colors.remove(colorChoose)
+                colorsGuessing.remove(colorChoose)
                 guessLine.pieces.append(piece)
                 i += 1
-            #To Delete
+            #TODO To Delete
             print("\n \nPieces Guessed \n")
             for piece in guessLine.pieces : 
                 print("Index :",piece.Index, "Couleur :", piece.Color)
         self.lines.append(guessLine)
       
-    def CorrectLine(self, index) : 
+    def CorrectLine(self, index, colors) : 
         colorsLineGuess = []
         colorsSecretLine = []
         linesToCorrect = self.lines[index]
@@ -70,15 +71,22 @@ class Grid :
                 correctColors.append(ColorValidation.YELLOW)
             else :
                 correctColors.append(ColorValidation.RED)
+                #TODO delete comments
+                print("----------- DEBUG -----------")
+                print("Colors ", colors)
+                print("couleur de la pièce ", piecesLinesToCorrect.Color)
+                print("----------- DEBUG -----------")
+                #TODO see we can delete this conditions
+                if piecesLinesToCorrect.Color in colors :
+                    print("je supprime ", piecesLinesToCorrect.Color)
+                    colors.remove(piecesLinesToCorrect.Color)
             i += 1
 
-        #TODO to delete in finish phase
         allPiecesGuess = True
         for colorValidation in correctColors : 
             if colorValidation != ColorValidation.WHITE :
                 allPiecesGuess = False
-            print(colorValidation)
-
+            
         self.piecesValidation = correctColors
 
         return allPiecesGuess
