@@ -16,14 +16,20 @@ class Game:
         Guesser = Player(PlayerType.GUESSER)
         turn = 1 
         guesserWins = False
-        colors = [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
-                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]
+        colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                2 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
         Master.CreateSecretLine(grid)
             
         while turn <= 12 and guesserWins == False:
-            print("BEGIN Turn number  ", turn)
             #TODO supprimer print
-            Guesser.GuessSecretLine(grid,turn, colors)
+            print("\n\nBEGIN Turn number  ", turn)
+            Guesser.GuessSecretLine(grid, turn, colors)
             #TODO pass by player like createsecretline and guesssecretline or delete player.py
             guesserWins = grid.CorrectLine(turn, colors)
             turn += 1

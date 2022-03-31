@@ -23,29 +23,34 @@ class Grid :
             ''' To delete new loops'''
             print("Secret Line \n")
             for piece in secretLine.pieces : 
-                print("Index :",piece.Index, "Couleur :", piece.Color)
+                print("Couleur :", piece.Color)
         self.lines.append(secretLine)
+        
 
     #TODO factoriser with CreateSecretLine
     def GuessLine(self, index, colors) : 
-        colorsGuessing = copy.copy(colors)
-        guessLine = Line(index)
+        colorsGuessing = copy.deepcopy(colors)
         
+        guessLine = Line(index)
+
         if guessLine.index > 0 :
             maxPiece = 4
             i = 0
             while i < maxPiece :
-                indexNewColor = random.randrange(0, len(colorsGuessing))
-                colorChoose = colorsGuessing[indexNewColor]
-                piece = Piece(i, colorChoose, PieceType.COLOR)
-                colorsGuessing.remove(colorChoose)
+                #TODO delete next print
+                colorsToSelect = colorsGuessing[i]
+                indexNewColor = random.randrange(0, len(colorsToSelect))
+                colorChoose = colorsToSelect[indexNewColor]
+                piece = Piece(index, colorChoose, PieceType.COLOR)
+                colorsToSelect.remove(colorChoose)
                 guessLine.pieces.append(piece)
                 i += 1
             #TODO To Delete
             print("\n \nPieces Guessed \n")
             for piece in guessLine.pieces : 
-                print("Index :",piece.Index, "Couleur :", piece.Color)
+                print("Couleur :", piece.Color)
         self.lines.append(guessLine)
+        
       
     def CorrectLine(self, index, colors) : 
         colorsLineGuess = []
@@ -63,23 +68,20 @@ class Grid :
         i = 0 
         maxPiece = 4
         while i < maxPiece :
-            piecesLinesToCorrect = linesToCorrect.pieces[i]
-            piecesSecretLine = secretLine.pieces[i]
-            if piecesLinesToCorrect.Color == piecesSecretLine.Color : 
+            pieceToCorrect = linesToCorrect.pieces[i]
+            pieceSecret = secretLine.pieces[i]
+            if pieceToCorrect.Color == pieceSecret.Color : 
                 correctColors.append(ColorValidation.WHITE)
-            elif piecesLinesToCorrect.Color in colorsSecretLine : 
+            elif pieceToCorrect.Color in colorsSecretLine : 
                 correctColors.append(ColorValidation.YELLOW)
+                colors[i].remove(pieceToCorrect.Color)
             else :
                 correctColors.append(ColorValidation.RED)
-                #TODO delete comments
-                print("----------- DEBUG -----------")
-                print("Colors ", colors)
-                print("couleur de la pièce ", piecesLinesToCorrect.Color)
-                print("----------- DEBUG -----------")
-                #TODO see we can delete this conditions
-                if piecesLinesToCorrect.Color in colors :
-                    print("je supprime ", piecesLinesToCorrect.Color)
-                    colors.remove(piecesLinesToCorrect.Color)
+                j = 0
+                while j < maxPiece : 
+                    colors[j].remove(pieceToCorrect.Color)
+                    j += 1 
+
             i += 1
 
         allPiecesGuess = True
