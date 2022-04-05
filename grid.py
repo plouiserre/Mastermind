@@ -39,7 +39,7 @@ class Grid :
             i = 0
             while i < maxPiece :
                 colorsToSelect = colorsGuessing[i]
-                colorChoose = self.ChooseColorGuessing(colorsToSelect, guessLine.pieces)
+                colorChoose = self.ChooseColorGuessing(colorsGuessing, i, guessLine.pieces)
                 piece = Piece(index, colorChoose, PieceType.COLOR)
                 colorsToSelect.remove(colorChoose)
                 guessLine.pieces.append(piece)
@@ -72,13 +72,15 @@ class Grid :
         
 
     #TODO method to optimize
-    def ChooseColorGuessing(self, colors, pieces) :
+    def ChooseColorGuessing(self, colorsGuessing, index, pieces) :
+        colors = colorsGuessing[index]
         colorIsChoosing = False 
-        colorChoose = None
         alert = 1
         while colorIsChoosing == False :
             if alert == 10 : 
-                print("problem with ", colorChoose,"and ",colors)
+                indexNewColor = random.randrange(0, len(colors))
+                colorChoose = colors[indexNewColor]
+                break
             indexNewColor = random.randrange(0, len(colors))
             colorChoose = colors[indexNewColor]
             isColorPossible = True
