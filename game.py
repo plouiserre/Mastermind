@@ -1,7 +1,6 @@
 from line import Line
 from piece import Piece, ColorCombinaison
 #TODO : à supprimer
-from player import PlayerType, Player
 from grid import Grid
 
 #TODO : change class name to board
@@ -12,8 +11,6 @@ class Game:
     #TODO : manage all game
     def Play(self):
         grid = Grid()
-        Master = Player(PlayerType.MASTER)
-        Guesser = Player(PlayerType.GUESSER)
         turn = 1 
         guesserWins = False
         colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
@@ -24,12 +21,12 @@ class Game:
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
                 3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
-        Master.CreateSecretLine(grid)
+        grid.CreateSecretLine()
             
         while turn <= 12 and guesserWins == False:
             #TODO supprimer print
             print("\n\nBEGIN Turn number  ", turn)
-            Guesser.GuessSecretLine(grid, turn, colors)
+            grid.GuessLine(turn, colors)
             #TODO pass by player like createsecretline and guesssecretline or delete player.py
             guesserWins = grid.CorrectLine(turn, colors)
             turn += 1

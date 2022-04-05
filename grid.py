@@ -1,7 +1,7 @@
 import random
 import copy
 import operator
-from piece import ColorValidation, Piece, ColorCombinaison, PieceType
+from piece import ColorValidation, Piece, PieceType
 from line import Line
 
 class Grid :
