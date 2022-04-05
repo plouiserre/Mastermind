@@ -1,12 +1,20 @@
 import random
 import copy
 import operator
-from piece import ColorValidation, Piece, PieceType
+from piece import ColorValidation, Piece, PieceType, ColorCombinaison
 from line import Line
 
 class Grid :
     def __init__(self) :
         self.lines = []
+        self.colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                2 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
 
     def CreateSecretLine(self) :
         secretLine  = Line(0)
@@ -14,8 +22,7 @@ class Grid :
             maxPiece = 4
             i = 0 
             while i < maxPiece :
-                indexNewColor = random.randrange(0, len(secretLine.colors))
-                colorChoose = secretLine.colors[indexNewColor]
+                colorChoose = self.ChooseColorFromChoice(secretLine.colors)                
                 piece = Piece(i, colorChoose, PieceType.COLOR)
                 secretLine.colors.remove(colorChoose)
                 secretLine.pieces.append(piece)
@@ -27,10 +34,8 @@ class Grid :
         self.lines.append(secretLine)
         
 
-    def GuessLine(self, index, colors) : 
-        colorsGuessing = copy.deepcopy(colors)
-        
-        self.OrderColors(colorsGuessing)
+    def GuessLine(self, index) : 
+        colorsGuessing = copy.deepcopy(self.colors)
         
         guessLine = Line(index)
 
@@ -51,26 +56,6 @@ class Grid :
         self.lines.append(guessLine)
 
 
-    def OrderColors(self, colors) :
-        print(colors)
-        LinesByOccurences = {}
-        for key, values in colors.items() :
-            occurences = len(values)
-            LinesByOccurences[key] = occurences
-        
-        OccurencesSortend = sorted(LinesByOccurences.items(), key=operator.itemgetter(1))
-        keysSorted = []
-        for sort in OccurencesSortend : 
-            keysSorted.append(sort[0])
-
-        ColorsSorted = {}
-        for key in keysSorted : 
-            ColorsSorted[key] = colors[key]
-
-        colors = ColorsSorted
-        print("colors after ordercolors", colors)
-        
-
     #TODO method to optimize
     def ChooseColorGuessing(self, colorsGuessing, index, pieces) :
         colors = colorsGuessing[index]
@@ -78,11 +63,9 @@ class Grid :
         alert = 1
         while colorIsChoosing == False :
             if alert == 10 : 
-                indexNewColor = random.randrange(0, len(colors))
-                colorChoose = colors[indexNewColor]
+                colorChoose = self.ChooseColorFromChoice(colors)
                 break
-            indexNewColor = random.randrange(0, len(colors))
-            colorChoose = colors[indexNewColor]
+            colorChoose = self.ChooseColorFromChoice(colors)
             isColorPossible = True
             for piece in pieces :
                 if piece.Color == colorChoose :
@@ -93,7 +76,7 @@ class Grid :
         return colorChoose
 
       
-    def CorrectLine(self, index, colors) : 
+    def CorrectLine(self, index) : 
         colorsLineGuess = []
         colorsSecretLine = []
         linesToCorrect = self.lines[index]
@@ -112,20 +95,17 @@ class Grid :
             pieceSecret = secretLine.pieces[i]
             if pieceToCorrect.Color == pieceSecret.Color : 
                 correctColors.append(ColorValidation.WHITE)
-                self.ManageWhiteCorrection(maxPiece, colors, i, pieceToCorrect.Color)
+                self.ManageWhiteCorrection(maxPiece, self.colors, i, pieceToCorrect.Color)
             elif pieceToCorrect.Color in colorsSecretLine : 
                 correctColors.append(ColorValidation.YELLOW)
-                colors[i].remove(pieceToCorrect.Color)
-                #TODO to delete when everything will be working
-                print("Correction jaune de la couleur", pieceToCorrect.Color,". Je la supprime de la ligne ",i)
+                self.colors[i].remove(pieceToCorrect.Color)
             else :
                 correctColors.append(ColorValidation.RED)
                 j = 0
                 while j < maxPiece : 
-                    if pieceToCorrect.Color in colors[j] :
-                        colors[j].remove(pieceToCorrect.Color)
+                    if pieceToCorrect.Color in self.colors[j] :
+                        self.colors[j].remove(pieceToCorrect.Color)
                     j += 1 
-                print("Correction rouge de la couleur",pieceToCorrect.Color,". Je la supprime partout")
             i += 1
 
         allPiecesGuess = True
@@ -138,20 +118,21 @@ class Grid :
         return allPiecesGuess
 
     
-    #TODO delete print in this method
     def ManageWhiteCorrection(self, maxPiece, colors, index, color) :
         indexWhiteCorrection = 0
-        print("Correction blanche \n")
         while indexWhiteCorrection < maxPiece :
             #second condition is needed because if you have a yellow correction before 
             #this white the algo has removed the color
             if indexWhiteCorrection != index and color in colors[indexWhiteCorrection]: 
                 colors[indexWhiteCorrection].remove(color)
-                print("Suppression de ",color,"à la ligne ",indexWhiteCorrection)
             elif indexWhiteCorrection == index: 
-               #faire une boucle sur les couleurs et supprimer si c'est pas color 
                for colorToInspect in colors[indexWhiteCorrection] :
                    if colorToInspect != color : 
                        colors[indexWhiteCorrection].remove(colorToInspect)
-                       print("Suppressoin de ",colorToInspect,"dans l'index",indexWhiteCorrection)
             indexWhiteCorrection += 1
+
+
+    def ChooseColorFromChoice(self, colors) :
+        indexNewColor = random.randrange(0, len(colors))
+        colorChoose = colors[indexNewColor]
+        return colorChoose

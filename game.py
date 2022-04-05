@@ -13,6 +13,7 @@ class Game:
         grid = Grid()
         turn = 1 
         guesserWins = False
+        '''
         colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
                 1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
@@ -21,14 +22,15 @@ class Game:
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
                 3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
+        '''
         grid.CreateSecretLine()
             
         while turn <= 12 and guesserWins == False:
             #TODO supprimer print
             print("\n\nBEGIN Turn number  ", turn)
-            grid.GuessLine(turn, colors)
+            grid.GuessLine(turn)
             #TODO pass by player like createsecretline and guesssecretline or delete player.py
-            guesserWins = grid.CorrectLine(turn, colors)
+            guesserWins = grid.CorrectLine(turn)
             turn += 1
             
         print("game finish")
