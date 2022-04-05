@@ -23,7 +23,7 @@ class PieceType(Enum):
     VALIDATION = 2
 
 class Piece : 
-    def __init__(self, index, color, type) :
-        self.Index = index
+    def __init__(self, line, color, type) :
+        self.Line = line
         self.Type = type
         self.Color = color 

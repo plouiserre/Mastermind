@@ -17,9 +17,9 @@ class Player :
         else :
             raise Exception("Only MASTER player can create SecretLine")
 
-    def GuessSecretLine(self, grid, index) :
+    def GuessSecretLine(self, grid, index, colors) :
         if self.Type == PlayerType.GUESSER :
-            grid.GuessLine(index)
+            grid.GuessLine(index, colors)
         else : 
             raise Exception("Only GUESSER player can guess the secret Line")
         

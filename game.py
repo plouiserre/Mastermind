@@ -1,4 +1,5 @@
 from line import Line
+from piece import Piece, ColorCombinaison
 #TODO : à supprimer
 from player import PlayerType, Player
 from grid import Grid
@@ -15,13 +16,24 @@ class Game:
         Guesser = Player(PlayerType.GUESSER)
         turn = 1 
         guesserWins = False
-        
+        colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                2 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
+                3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
+        Master.CreateSecretLine(grid)
+            
         while turn <= 12 and guesserWins == False:
-            Master.CreateSecretLine(grid)
-            Guesser.GuessSecretLine(grid,1)
-            guesserWins = grid.CorrectLine(1)
+            #TODO supprimer print
+            print("\n\nBEGIN Turn number  ", turn)
+            Guesser.GuessSecretLine(grid, turn, colors)
+            #TODO pass by player like createsecretline and guesssecretline or delete player.py
+            guesserWins = grid.CorrectLine(turn, colors)
             turn += 1
-        
+            
         print("game finish")
         if guesserWins == True :
             print("guesser wins")
