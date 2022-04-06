@@ -38,7 +38,7 @@ class Grid :
         colorsGuessing = copy.deepcopy(self.colors)
         
         guessLine = Line(index)
-
+        '''
         if guessLine.index > 0 :
             maxPiece = 4
             i = 0
@@ -53,6 +53,8 @@ class Grid :
             print("\n \nPieces Guessed \n")
             for piece in guessLine.pieces : 
                 print("Couleur :", piece.Color)
+        '''
+        guessLine.GuessContent(colorsGuessing)
         self.lines.append(guessLine)
 
 
@@ -131,7 +133,7 @@ class Grid :
                        colors[indexWhiteCorrection].remove(colorToInspect)
             indexWhiteCorrection += 1
 
-
+    #TODO to delete because after it will be useless
     def ChooseColorFromChoice(self, colors) :
         indexNewColor = random.randrange(0, len(colors))
         colorChoose = colors[indexNewColor]
