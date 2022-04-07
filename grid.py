@@ -1,6 +1,5 @@
 import random
 import copy
-import operator
 from piece import ColorValidation, Piece, PieceType, ColorCombinaison
 from line import Line
 
@@ -22,7 +21,8 @@ class Grid :
             maxPiece = 4
             i = 0 
             while i < maxPiece :
-                colorChoose = self.ChooseColorFromChoice(secretLine.colors)                
+                indexNewColor = random.randrange(0, len(secretLine.colors))
+                colorChoose = secretLine.colors[indexNewColor]
                 piece = Piece(i, colorChoose, PieceType.COLOR)
                 secretLine.colors.remove(colorChoose)
                 secretLine.pieces.append(piece)
@@ -38,46 +38,11 @@ class Grid :
         colorsGuessing = copy.deepcopy(self.colors)
         
         guessLine = Line(index)
-        '''
-        if guessLine.index > 0 :
-            maxPiece = 4
-            i = 0
-            while i < maxPiece :
-                colorsToSelect = colorsGuessing[i]
-                colorChoose = self.ChooseColorGuessing(colorsGuessing, i, guessLine.pieces)
-                piece = Piece(index, colorChoose, PieceType.COLOR)
-                colorsToSelect.remove(colorChoose)
-                guessLine.pieces.append(piece)
-                i += 1
-            #TODO To Delete
-            print("\n \nPieces Guessed \n")
-            for piece in guessLine.pieces : 
-                print("Couleur :", piece.Color)
-        '''
+
         guessLine.GuessContent(colorsGuessing)
         self.lines.append(guessLine)
 
 
-    #TODO method to optimize
-    def ChooseColorGuessing(self, colorsGuessing, index, pieces) :
-        colors = colorsGuessing[index]
-        colorIsChoosing = False 
-        alert = 1
-        while colorIsChoosing == False :
-            if alert == 10 : 
-                colorChoose = self.ChooseColorFromChoice(colors)
-                break
-            colorChoose = self.ChooseColorFromChoice(colors)
-            isColorPossible = True
-            for piece in pieces :
-                if piece.Color == colorChoose :
-                    isColorPossible = False 
-            if isColorPossible :
-                colorIsChoosing = True
-            alert += 1
-        return colorChoose
-
-      
     def CorrectLine(self, index) : 
         colorsLineGuess = []
         colorsSecretLine = []
@@ -132,9 +97,3 @@ class Grid :
                    if colorToInspect != color : 
                        colors[indexWhiteCorrection].remove(colorToInspect)
             indexWhiteCorrection += 1
-
-    #TODO to delete because after it will be useless
-    def ChooseColorFromChoice(self, colors) :
-        indexNewColor = random.randrange(0, len(colors))
-        colorChoose = colors[indexNewColor]
-        return colorChoose
