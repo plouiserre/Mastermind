@@ -68,17 +68,3 @@ class Grid :
         self.piecesValidation = correctColors
 
         return allPiecesGuess
-
-    
-    def ManageWhiteCorrection(self, maxPiece, colors, index, color) :
-        indexWhiteCorrection = 0
-        while indexWhiteCorrection < maxPiece :
-            #second condition is needed because if you have a yellow correction before 
-            #this white the algo has removed the color
-            if indexWhiteCorrection != index and color in colors[indexWhiteCorrection]: 
-                colors[indexWhiteCorrection].remove(color)
-            elif indexWhiteCorrection == index: 
-               for colorToInspect in colors[indexWhiteCorrection] :
-                   if colorToInspect != color : 
-                       colors[indexWhiteCorrection].remove(colorToInspect)
-            indexWhiteCorrection += 1
