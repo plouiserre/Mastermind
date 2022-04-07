@@ -44,14 +44,11 @@ class Grid :
 
 
     def CorrectLine(self, index) : 
-        colorsLineGuess = []
         colorsSecretLine = []
         linesToCorrect = self.lines[index]
         secretLine = self.lines[0]
         correctColors = []
         
-        for piece in linesToCorrect.pieces : 
-            colorsLineGuess.append(piece.Color)
         for piece in secretLine.pieces : 
             colorsSecretLine.append(piece.Color)
 
@@ -59,20 +56,8 @@ class Grid :
         maxPiece = 4
         while i < maxPiece :
             pieceToCorrect = linesToCorrect.pieces[i]
-            pieceSecret = secretLine.pieces[i]
-            if pieceToCorrect.Color == pieceSecret.Color : 
-                correctColors.append(ColorValidation.WHITE)
-                self.ManageWhiteCorrection(maxPiece, self.colors, i, pieceToCorrect.Color)
-            elif pieceToCorrect.Color in colorsSecretLine : 
-                correctColors.append(ColorValidation.YELLOW)
-                self.colors[i].remove(pieceToCorrect.Color)
-            else :
-                correctColors.append(ColorValidation.RED)
-                j = 0
-                while j < maxPiece : 
-                    if pieceToCorrect.Color in self.colors[j] :
-                        self.colors[j].remove(pieceToCorrect.Color)
-                    j += 1 
+            correctColor = pieceToCorrect.CorrectPiece(colorsSecretLine, self.colors)
+            correctColors.append(correctColor)
             i += 1
 
         allPiecesGuess = True

@@ -13,16 +13,6 @@ class Game:
         grid = Grid()
         turn = 1 
         guesserWins = False
-        '''
-        colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
-                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
-                1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
-                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
-                2 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
-                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
-                3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
-                    ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
-        '''
         grid.CreateSecretLine()
             
         while turn <= 12 and guesserWins == False:
