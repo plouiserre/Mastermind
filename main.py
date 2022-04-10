@@ -2,16 +2,13 @@ import logging
 from game import Game
 from logger import Logger
 
-numberGame = 0 
+numberGame = 1 
 
-#logging.basicConfig(format ='%(levelname)s: %(asctime)s | %(message)s ' ,filename='mastermind.log', encoding='utf-8', level=logging.DEBUG)
-#logging.warning("Hello world geeks!!!") 
 log = Logger(logging.DEBUG, '%(levelname)s: %(asctime)s | %(message)s ', 'utf-8', 'mastermind.log')
-log.LogInDebugLevel("Hello world geeks!!!")
-while numberGame < 20 :
-    print("-------------------------------")
-    print("Partie ", numberGame)
+log.LogInDebugLevel("Start games!!!")
+while numberGame <= 20 :
+    log.LogInDebugLevel("Partie %s" % numberGame)
     game = Game()
     game.Play()
     numberGame += 1
-    print("-------------------------------")
+log.LogInDebugLevel("Game is finish!!!")
