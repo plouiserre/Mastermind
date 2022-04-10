@@ -6,7 +6,7 @@ class Game:
         self.log = Log
     
     def Play(self):
-        grid = Grid()
+        grid = Grid(self.log)
         turn = 1 
         guesserWins = False
         grid.CreateSecretLine()
