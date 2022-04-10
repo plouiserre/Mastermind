@@ -2,13 +2,14 @@ import random
 from piece import Piece, ColorCombinaison, PieceType
 
 class Line : 
-    def __init__(self, index) :
+    def __init__(self, index, Log) :
         self.pieces = []
         self.index = index
         self.colors = [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, 
                         ColorCombinaison.PINK, ColorCombinaison.PURPLE, ColorCombinaison.RED,
                         ColorCombinaison.YELLOW]
         self.piecesValidation = []
+        self.log = Log
         
 
     def GuessContent(self, colorsGuessing) :
@@ -23,6 +24,6 @@ class Line :
                 self.pieces.append(piece)
                 i += 1
             #TODO To Delete
-            print("\n \nPieces Guessed \n")
+            self.log.LogInDebugLevel("Pieces Guessed")
             for piece in self.pieces : 
-                print("Couleur :", piece.Color)
+                self.log.LogInDebugLevel("Couleur : %s" % piece.Color)

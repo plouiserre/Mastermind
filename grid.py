@@ -4,7 +4,7 @@ from piece import ColorValidation, Piece, PieceType, ColorCombinaison
 from line import Line
 
 class Grid :
-    def __init__(self) :
+    def __init__(self, Log) :
         self.lines = []
         self.colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
@@ -14,9 +14,10 @@ class Grid :
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
                 3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
+        self.log = Log
 
     def CreateSecretLine(self) :
-        secretLine  = Line(0)
+        secretLine  = Line(0, self.log)
         if secretLine.index == 0 : 
             maxPiece = 4
             i = 0 
@@ -28,16 +29,16 @@ class Grid :
                 secretLine.pieces.append(piece)
                 i += 1
             ''' To delete new loops'''
-            print("Secret Line \n")
+            self.log.LogInDebugLevel("Secret Line")
             for piece in secretLine.pieces : 
-                print("Couleur :", piece.Color)
+                self.log.LogInDebugLevel("Couleur :%s" % piece.Color)
         self.lines.append(secretLine)
         
 
     def GuessLine(self, index) : 
         colorsGuessing = copy.deepcopy(self.colors)
         
-        guessLine = Line(index)
+        guessLine = Line(index, self.log)
 
         guessLine.GuessContent(colorsGuessing)
         self.lines.append(guessLine)
