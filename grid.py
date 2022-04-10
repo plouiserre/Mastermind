@@ -17,7 +17,7 @@ class Grid :
         self.log = Log
 
     def CreateSecretLine(self) :
-        secretLine  = Line(0)
+        secretLine  = Line(0, self.log)
         if secretLine.index == 0 : 
             maxPiece = 4
             i = 0 
@@ -38,7 +38,7 @@ class Grid :
     def GuessLine(self, index) : 
         colorsGuessing = copy.deepcopy(self.colors)
         
-        guessLine = Line(index)
+        guessLine = Line(index, self.log)
 
         guessLine.GuessContent(colorsGuessing)
         self.lines.append(guessLine)
