@@ -24,6 +24,6 @@ class Line :
                 self.pieces.append(piece)
                 i += 1
             #TODO To Delete
-            self.log.LogInDebugLevel("Pieces Guessed")
+            self.log.LogInInfoLevel("Pieces Guessed")
             for piece in self.pieces : 
-                self.log.LogInDebugLevel("Couleur : %s" % piece.Color)
+                self.log.LogInInfoLevel("Couleur : %s" % piece.Color)

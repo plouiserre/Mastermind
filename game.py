@@ -12,14 +12,14 @@ class Game:
         grid.CreateSecretLine()
             
         while turn <= 12 and guesserWins == False:
-            self.log.LogInDebugLevel("BEGIN Turn number  %s" % turn)
+            self.log.LogInInfoLevel("BEGIN Turn number  %s" % turn)
             grid.GuessLine(turn)
             #TODO pass by player like createsecretline and guesssecretline or delete player.py
             guesserWins = grid.CorrectLine(turn)
             turn += 1
             
-        self.log.LogInDebugLevel("game finish")
+        self.log.LogInInfoLevel("game finish")
         if guesserWins == True :
-            self.log.LogInDebugLevel("guesser wins")
+            self.log.LogInInfoLevel("guesser wins")
         else :
-            self.log.LogInDebugLevel("master winner")
+            self.log.LogInInfoLevel("master winner")

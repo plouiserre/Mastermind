@@ -29,9 +29,9 @@ class Grid :
                 secretLine.pieces.append(piece)
                 i += 1
             ''' To delete new loops'''
-            self.log.LogInDebugLevel("Secret Line")
+            self.log.LogInInfoLevel("Secret Line")
             for piece in secretLine.pieces : 
-                self.log.LogInDebugLevel("Couleur :%s" % piece.Color)
+                self.log.LogInInfoLevel("Couleur :%s" % piece.Color)
         self.lines.append(secretLine)
         
 
