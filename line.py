@@ -23,10 +23,7 @@ class Line :
                 self.colors.remove(colorChoose)
                 self.pieces.append(piece)
                 i += 1
-            ''' To delete new loops'''
-            self.log.LogInInfoLevel("Secret Line")
-            for piece in self.pieces : 
-                self.log.LogInInfoLevel("Couleur :%s" % piece.Color)
+            self.LogPiecesDefined("Secret Line")
         
 
     def GuessContent(self, colorsGuessing) :
@@ -40,7 +37,10 @@ class Line :
                 colorsToSelect.remove(piece.Color)
                 self.pieces.append(piece)
                 i += 1
-            #TODO To Delete
-            self.log.LogInInfoLevel("Pieces Guessed")
-            for piece in self.pieces : 
-                self.log.LogInInfoLevel("Couleur : %s" % piece.Color)
+            self.LogPiecesDefined("Pieces Guessed")
+
+
+    def LogPiecesDefined(self, labelLog) :
+        self.log.LogInInfoLevel(labelLog)
+        for piece in self.pieces : 
+            self.log.LogInInfoLevel("Couleur :%s" % piece.Color)
