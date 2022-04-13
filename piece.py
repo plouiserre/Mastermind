@@ -31,7 +31,6 @@ class Piece :
         self.MaxPiece = 4
 
 
-    #TODO ameliorer les paramètres
     def SetColor(self, colorsGuessing, line) :
         colors = colorsGuessing[self.Index]
         colorIsChoosing = False 

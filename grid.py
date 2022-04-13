@@ -18,20 +18,7 @@ class Grid :
 
     def CreateSecretLine(self) :
         secretLine  = Line(0, self.log)
-        if secretLine.index == 0 : 
-            maxPiece = 4
-            i = 0 
-            while i < maxPiece :
-                indexNewColor = random.randrange(0, len(secretLine.colors))
-                colorChoose = secretLine.colors[indexNewColor]
-                piece = Piece(i, colorChoose, PieceType.COLOR)
-                secretLine.colors.remove(colorChoose)
-                secretLine.pieces.append(piece)
-                i += 1
-            ''' To delete new loops'''
-            self.log.LogInInfoLevel("Secret Line")
-            for piece in secretLine.pieces : 
-                self.log.LogInInfoLevel("Couleur :%s" % piece.Color)
+        secretLine.FillSecretLine()
         self.lines.append(secretLine)
         
 
