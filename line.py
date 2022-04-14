@@ -10,6 +10,20 @@ class Line :
                         ColorCombinaison.YELLOW]
         self.piecesValidation = []
         self.log = Log
+
+
+    def FillSecretLine(self) :
+        if self.index == 0 : 
+            maxPiece = 4
+            i = 0 
+            while i < maxPiece :
+                indexNewColor = random.randrange(0, len(self.colors))
+                colorChoose = self.colors[indexNewColor]
+                piece = Piece(i, colorChoose, PieceType.COLOR, self.log)
+                self.colors.remove(colorChoose)
+                self.pieces.append(piece)
+                i += 1
+            self.LogPiecesDefined("Secret Line")
         
 
     def GuessContent(self, colorsGuessing) :
@@ -18,12 +32,17 @@ class Line :
             i = 0
             while i < maxPiece :
                 colorsToSelect = colorsGuessing[i]
-                piece = Piece(i, None, PieceType.COLOR)
+                piece = Piece(i, None, PieceType.COLOR, self.log)
                 piece.SetColor(colorsGuessing, self)
+                self.LogPiecesDefined("colorsToSelect log %s" % colorsToSelect)
+                self.LogPiecesDefined("couleur à supprimer %s" % piece.Color)
                 colorsToSelect.remove(piece.Color)
                 self.pieces.append(piece)
                 i += 1
-            #TODO To Delete
-            self.log.LogInDebugLevel("Pieces Guessed")
-            for piece in self.pieces : 
-                self.log.LogInDebugLevel("Couleur : %s" % piece.Color)
+            self.LogPiecesDefined("Pieces Guessed")
+
+
+    def LogPiecesDefined(self, labelLog) :
+        self.log.LogInInfoLevel(labelLog)
+        for piece in self.pieces : 
+            self.log.LogInInfoLevel("Couleur :%s" % piece.Color)
