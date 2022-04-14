@@ -24,11 +24,12 @@ class PieceType(Enum):
     VALIDATION = 2
 
 class Piece : 
-    def __init__(self, index, color, type) :
+    def __init__(self, index, color, type, Log) :
         self.Index = index
         self.Type = type
         self.Color = color
         self.MaxPiece = 4
+        self.log = Log
 
 
     def SetColor(self, colorsGuessing, line) :
@@ -45,8 +46,10 @@ class Piece :
                     isColorPossible = False 
             if isColorPossible :
                 colorIsChoosing = True
+                logmessage = "Color choose {0} for index {1}".format(self.Color, self.Index)
+                self.log.LogInInfoLevel(logmessage)
             alert += 1
-
+    
 
     def ChooseColorFromChoice(self, colors) :
         indexNewColor = random.randrange(0, len(colors))
@@ -60,7 +63,8 @@ class Piece :
                 self.ManageWhiteCorrection(colors)
         elif self.Color in colorsSecretLine : 
             correctColor = ColorValidation.YELLOW
-            colors[self.Index].remove(self.Color)
+            if self.Color in colors[self.Index] :
+                colors[self.Index].remove(self.Color)
         else :
             correctColor = ColorValidation.RED
             j = 0
