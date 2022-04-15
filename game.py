@@ -9,7 +9,7 @@ class Game:
     
     def Play(self):
         grid = Grid(self.log)
-        render = Render(grid, self.maxTurn)
+        render = Render(grid)
         turn = 1 
         guesserWins = False
         grid.CreateSecretLine()
