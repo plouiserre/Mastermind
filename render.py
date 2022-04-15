@@ -1,6 +1,7 @@
-from piece import ColorCombinaison 
+from piece import ColorCombinaison, ColorValidation 
 
 class bcolors:
+    WHITE = '\033[0m'
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
@@ -28,9 +29,9 @@ class Render :
             else :
                 labelLine = i 
             contentLine = self.RenderSpecificLine(i)
-            print(" ------------- ")
-            print("|{}{}".format(labelLine, contentLine))
-            print(" ------------- ")
+            print(" ----------------- ")
+            print("|{}|{}".format(labelLine, contentLine))
+            print(" ----------------- ")
             i += 1
 
         
@@ -40,6 +41,12 @@ class Render :
         contentLine = ""
 
         line = self.grid.lines[numberLine]
+        if numberLine > 0 : 
+            for piece in line.pieces :
+                contentLine += self.RenderCorrection(piece)
+        else :
+            contentLine +="    "
+
         for piece in line.pieces :
             contentLine += self.RenderSpecificPiece(piece)
 
@@ -62,3 +69,12 @@ class Render :
             return "|"+bcolors.PURPLE+"█"+bcolors.ENDC+"|"
         else : 
             return "|"+bcolors.FAIL+"█"+bcolors.ENDC+"|"
+
+
+    def RenderCorrection(self, piece) :
+        if piece.CorrectColor == ColorValidation.RED :
+            return bcolors.FAIL+"¤"+bcolors.ENDC
+        elif piece.CorrectColor == ColorValidation.YELLOW : 
+            return bcolors.WARNING+"¤"+bcolors.ENDC
+        else :
+            return bcolors.WHITE+"¤"+bcolors.ENDC
