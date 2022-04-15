@@ -9,7 +9,7 @@ class ColorCombinaison(Enum) :
     BLUE = 4
     YELLOW = 5
     PURPLE = 6
-    ORANGE = 7
+    CYAN = 7
 
 class ColorValidation(Enum) : 
     #RED color missing in the secret combinaison
@@ -30,6 +30,7 @@ class Piece :
         self.Color = color
         self.MaxPiece = 4
         self.log = Log
+        self.CorrectColor = None
 
 
     def SetColor(self, colorsGuessing, line) :
@@ -72,7 +73,7 @@ class Piece :
                 if self.Color in colors[j] :
                     colors[j].remove(self.Color)
                 j += 1 
-        return correctColor
+        self.CorrectColor = correctColor
 
 
     def ManageWhiteCorrection(self, colors) :

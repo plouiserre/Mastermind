@@ -5,10 +5,9 @@ class Line :
     def __init__(self, index, Log) :
         self.pieces = []
         self.index = index
-        self.colors = [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, 
+        self.colors = [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.CYAN, 
                         ColorCombinaison.PINK, ColorCombinaison.PURPLE, ColorCombinaison.RED,
                         ColorCombinaison.YELLOW]
-        self.piecesValidation = []
         self.log = Log
 
 
