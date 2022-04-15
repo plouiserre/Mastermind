@@ -9,7 +9,7 @@ class ColorCombinaison(Enum) :
     BLUE = 4
     YELLOW = 5
     PURPLE = 6
-    ORANGE = 7
+    CYAN = 7
 
 class ColorValidation(Enum) : 
     #RED color missing in the secret combinaison

@@ -6,13 +6,13 @@ from line import Line
 class Grid :
     def __init__(self, Log) :
         self.lines = []
-        self.colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+        self.colors = { 0 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.CYAN, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
-                1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                1 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.CYAN, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
-                2 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                2 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.CYAN, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW], 
-                3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.ORANGE, ColorCombinaison.PURPLE, 
+                3 : [ColorCombinaison.BLUE, ColorCombinaison.GREEN, ColorCombinaison.CYAN, ColorCombinaison.PURPLE, 
                     ColorCombinaison.RED, ColorCombinaison.PINK, ColorCombinaison.YELLOW]}
         self.log = Log
 
