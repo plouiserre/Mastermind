@@ -19,7 +19,7 @@ class Render :
         self.grid = Grid
 
 
-    def Rendering(self) :
+    def rendering(self) :
         i = 0
         maxTurn = len(self.grid.lines)
         while i < maxTurn :
@@ -28,7 +28,7 @@ class Render :
                 labelLine = "S" 
             else :
                 labelLine = i 
-            contentLine = self.RenderSpecificLine(i)
+            contentLine = self._render_specific_line(i)
             print(" ----------------- ")
             print("|{}|{}".format(labelLine, contentLine))
             print(" ----------------- ")
@@ -37,24 +37,24 @@ class Render :
         
 
 
-    def RenderSpecificLine(self, numberLine) :
+    def _render_specific_line(self, numberLine) :
         contentLine = ""
 
         line = self.grid.lines[numberLine]
         if numberLine > 0 : 
             for piece in line.pieces :
-                contentLine += self.RenderCorrection(piece)
+                contentLine += self._render_correction(piece)
         else :
             contentLine +="    "
 
         for piece in line.pieces :
-            contentLine += self.RenderSpecificPiece(piece)
+            contentLine += self._render_specific_piece(piece)
 
         return contentLine
 
 
     
-    def RenderSpecificPiece(self, piece) :
+    def _render_specific_piece(self, piece) :
         if piece.Color == ColorCombinaison.PINK :
             return "|"+bcolors.HEADER+"█"+bcolors.ENDC+"|"
         elif piece.Color == ColorCombinaison.BLUE : 
@@ -71,7 +71,7 @@ class Render :
             return "|"+bcolors.FAIL+"█"+bcolors.ENDC+"|"
 
 
-    def RenderCorrection(self, piece) :
+    def _render_correction(self, piece) :
         if piece.CorrectColor == ColorValidation.RED :
             return bcolors.FAIL+"¤"+bcolors.ENDC
         elif piece.CorrectColor == ColorValidation.YELLOW : 
