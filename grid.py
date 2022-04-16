@@ -17,22 +17,22 @@ class Grid :
         self.log = Log
         self.Corrections = {}
 
-    def CreateSecretLine(self) :
+    def create_secret_line(self) :
         secretLine  = Line(0, self.log)
-        secretLine.FillSecretLine()
+        secretLine.fill_secret_line()
         self.lines.append(secretLine)
         
 
-    def GuessLine(self, index) : 
+    def guess_line(self, index) : 
         colorsGuessing = copy.deepcopy(self.colors)
         
         guessLine = Line(index, self.log)
 
-        guessLine.GuessContent(colorsGuessing)
+        guessLine.guess_content(colorsGuessing)
         self.lines.append(guessLine)
 
 
-    def CorrectLine(self, index) : 
+    def correct_line(self, index) : 
         colorsSecretLine = []
         linesToCorrect = self.lines[index]
         secretLine = self.lines[0]
@@ -45,7 +45,7 @@ class Grid :
         maxPiece = 4
         while i < maxPiece :
             pieceToCorrect = linesToCorrect.pieces[i]
-            pieceToCorrect.CorrectPiece(colorsSecretLine, self.colors)
+            pieceToCorrect.correct_piece(colorsSecretLine, self.colors)
             correctColors.append(pieceToCorrect.CorrectColor)
             i += 1
 

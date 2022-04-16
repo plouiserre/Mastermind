@@ -11,7 +11,7 @@ class Line :
         self.log = Log
 
 
-    def FillSecretLine(self) :
+    def fill_secret_line(self) :
         if self.index == 0 : 
             maxPiece = 4
             i = 0 
@@ -22,26 +22,26 @@ class Line :
                 self.colors.remove(colorChoose)
                 self.pieces.append(piece)
                 i += 1
-            self.LogPiecesDefined("Secret Line")
+            self.__log_pieces_defined("Secret Line")
         
 
-    def GuessContent(self, colorsGuessing) :
+    def guess_content(self, colorsGuessing) :
         if self.index > 0 :
             maxPiece = 4
             i = 0
             while i < maxPiece :
                 colorsToSelect = colorsGuessing[i]
                 piece = Piece(i, None, PieceType.COLOR, self.log)
-                piece.SetColor(colorsGuessing, self)
-                self.LogPiecesDefined("colorsToSelect log %s" % colorsToSelect)
-                self.LogPiecesDefined("couleur à supprimer %s" % piece.Color)
+                piece.set_color(colorsGuessing, self)
+                self.__log_pieces_defined("colorsToSelect log %s" % colorsToSelect)
+                self.__log_pieces_defined("couleur à supprimer %s" % piece.Color)
                 colorsToSelect.remove(piece.Color)
                 self.pieces.append(piece)
                 i += 1
-            self.LogPiecesDefined("Pieces Guessed")
+            self.__log_pieces_defined("Pieces Guessed")
 
 
-    def LogPiecesDefined(self, labelLog) :
-        self.log.LogInInfoLevel(labelLog)
+    def __log_pieces_defined(self, labelLog) :
+        self.log.Log_Info_Level(labelLog)
         for piece in self.pieces : 
-            self.log.LogInInfoLevel("Couleur :%s" % piece.Color)
+            self.log.Log_Info_Level("Couleur :%s" % piece.Color)

@@ -7,17 +7,17 @@ class Logger :
         logging.basicConfig(format =formatApp ,filename=fileNameApp, encoding=encodingApp, level=levelApp)
     
     
-    def LogInDebugLevel(self, message) :
+    def Log_Debug_Level(self, message) :
         self.logging.debug(message)
 
 
-    def LogInInfoLevel(self, message) :
+    def Log_Info_Level(self, message) :
         self.logging.info(message)
 
 
-    def LogInWarningLevel(self, message) : 
+    def Log_Warning_Level(self, message) : 
         self.logging.warning(message)
 
 
-    def LogInErrorLevel(self, message) :
+    def Log_Error_Level(self, message) :
         self.logging.error(message)

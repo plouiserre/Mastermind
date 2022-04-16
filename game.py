@@ -7,25 +7,25 @@ class Game:
         self.log = Log
         self.maxTurn = 12
     
-    def Play(self):
+    def play(self):
         grid = Grid(self.log)
         render = Render(grid)
         turn = 1 
         guesserWins = False
-        grid.CreateSecretLine()
+        grid.create_secret_line()
             
         while turn <= self.maxTurn and guesserWins == False:
-            self.log.LogInInfoLevel("BEGIN Turn number  %s" % turn)
-            grid.GuessLine(turn)
+            self.log.Log_Info_Level("BEGIN Turn number  %s" % turn)
+            grid.guess_line(turn)
             #TODO pass by player like createsecretline and guesssecretline or delete player.py
-            guesserWins = grid.CorrectLine(turn)
+            guesserWins = grid.correct_line(turn)
             turn += 1
             
-        self.log.LogInInfoLevel("game finish")
+        self.log.Log_Info_Level("game finish")
 
-        render.Rendering()
+        render.rendering()
         
         if guesserWins == True :
-            self.log.LogInInfoLevel("guesser wins")
+            self.log.Log_Info_Level("guesser wins")
         else :
-            self.log.LogInInfoLevel("master winner")
+            self.log.Log_Info_Level("master winner")

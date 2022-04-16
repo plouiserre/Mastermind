@@ -33,14 +33,14 @@ class Piece :
         self.CorrectColor = None
 
 
-    def SetColor(self, colorsGuessing, line) :
+    def set_color(self, colorsGuessing, line) :
         colors = colorsGuessing[self.Index]
         colorIsChoosing = False 
         alert = 1
         while colorIsChoosing == False :
             if alert == 10 : 
                 break
-            self.ChooseColorFromChoice(colors)
+            self._choose_color_from_choice(colors)
             isColorPossible = True
             for piece in line.pieces :
                 if piece.Color == self.Color :
@@ -48,20 +48,20 @@ class Piece :
             if isColorPossible :
                 colorIsChoosing = True
                 logmessage = "Color choose {0} for index {1}".format(self.Color, self.Index)
-                self.log.LogInInfoLevel(logmessage)
+                self.log.Log_Info_Level(logmessage)
             alert += 1
     
 
-    def ChooseColorFromChoice(self, colors) :
+    def _choose_color_from_choice(self, colors) :
         indexNewColor = random.randrange(0, len(colors))
         self.Color = colors[indexNewColor]
 
 
-    def CorrectPiece(self, colorsSecretLine, colors) :
+    def correct_piece(self, colorsSecretLine, colors) :
         correctColor = None
         if self.Color == colorsSecretLine[self.Index] : 
                 correctColor = ColorValidation.WHITE
-                self.ManageWhiteCorrection(colors)
+                self._manage_white_correction(colors)
         elif self.Color in colorsSecretLine : 
             correctColor = ColorValidation.YELLOW
             if self.Color in colors[self.Index] :
@@ -76,7 +76,7 @@ class Piece :
         self.CorrectColor = correctColor
 
 
-    def ManageWhiteCorrection(self, colors) :
+    def _manage_white_correction(self, colors) :
         indexWhiteCorrection = 0
         while indexWhiteCorrection < self.MaxPiece :
             #second condition is needed because if you have a yellow correction before 
